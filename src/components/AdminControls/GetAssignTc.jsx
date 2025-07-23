@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../assets/utils/axiosInstance";
-import "../../styles/AdminStyles/viewAssignments.css"; // reuse your existing styles
+import "../../styles/AdminStyles/ViewAssignments.css"; // reuse your existing styles
 
 const GetAssignTc = ({ telecallerId }) => {
   const [assignment, setAssignment] = useState(null);
