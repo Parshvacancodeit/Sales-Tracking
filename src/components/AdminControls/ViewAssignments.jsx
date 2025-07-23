@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../assets/utils/axiosInstance";
-import "../../styles/AdminStyles/viewAssignments.css";
+import "../../styles/AdminStyles/ViewAssignments.css";
 
 const ViewAssignments = () => {
   const [assignments, setAssignments] = useState([]);
