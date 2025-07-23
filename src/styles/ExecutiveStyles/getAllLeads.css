@@ -1,0 +1,62 @@
+/* src/styles/ExecutiveStyles/getAllLeads.css */
+
+.executive-section {
+  padding: 20px;
+}
+
+.lead-filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.lead-filter-bar input {
+  padding: 8px;
+  width: 250px;
+}
+
+.lead-filter-bar button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.leads-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+.lead-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lead-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.lead-card p {
+  margin: 5px 0;
+}
+
+.lead-sub-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.lead-sub-info h4 {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555;
+}

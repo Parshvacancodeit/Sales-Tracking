@@ -1,0 +1,88 @@
+/* Root layout */
+.landing-container {
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #561cc7;
+}
+
+
+.logo img{
+    height: 50px;
+    width: auto;
+}
+
+
+
+/* Main content */
+.main-content {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.login-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  width: 250px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.login-card h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.login-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Color themes */
+.login-card.admin h2 {
+  color: #561cc7;
+}
+
+.login-card.telecaller h2 {
+  color: #ff3131;
+}
+
+.login-card.agent h2 {
+  color: #561cc7;
+}
+
+/* Footer note */
+.footer-note {
+  font-size: 14px;
+  color: #888;
+}

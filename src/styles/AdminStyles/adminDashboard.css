@@ -1,0 +1,136 @@
+/* Layout root */
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar styles */
+.admin-sidebar {
+  width: 240px;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #561cc7;
+  margin-bottom: 40px;
+}
+
+/* Sidebar buttons */
+.sidebar-btn {
+  background-color: transparent;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  color: #333;
+}
+
+.sidebar-btn:hover,
+.sidebar-btn.active {
+  background-color: #f0ecfc;
+  color: #561cc7;
+  font-weight: 600;
+}
+
+/* Main content area */
+.admin-main {
+  flex: 1;
+  padding: 40px 60px;
+  overflow-y: auto;
+}
+
+/* Content card layout */
+.content-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Section title */
+.section-title {
+  font-size: 24px;
+  color: #561cc7;
+  margin-bottom: 20px;
+}
+
+/* Forms and inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.form-input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #561cc7;
+  box-shadow: 0 0 0 2px rgba(86, 28, 199, 0.1);
+}
+
+.form-button {
+  background-color: #561cc7;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: fit-content;
+}
+
+.form-button:hover {
+  background-color: #3e109e;
+}
+
+/* User list */
+.user-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.user-item {
+  padding: 10px;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+/* Button group */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
