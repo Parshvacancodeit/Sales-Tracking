@@ -4,7 +4,7 @@ import TelecallerProfile from "../components/Telecaller/TelecallerProfile";
 import CreateLeadForm from "../components/Telecaller/CreateLeadForm";
 import AllLeadsList from "../components/Telecaller/AllLeadsList";
 import UpdateLeadForm from "../components/Telecaller/UpdateLeadForm";
-
+import TTopNav from "../components/Telecaller/TTopNav";
 import AssignedUsersList from "../components/Telecaller/AssignedUsersList";
 import UpdateProfileForm from "../components/Telecaller/UpdateProfileForm";
 
@@ -15,7 +15,7 @@ import "../styles/AdminStyles/adminDashboard.css";
 import { FaUser, FaEdit, FaPlus, FaList, FaHome } from "react-icons/fa";
 
 const TelecallerDashboard = () => {
-  const [view, setView] = useState("profile");
+ const [view, setView] = useState("create-lead");
   const [executiveId, setExecutiveId] = useState(null); // ✅
   const navigate = useNavigate();
 
@@ -101,29 +101,25 @@ const TelecallerDashboard = () => {
       <div className="admin-sidebar">
         <h2 className="logo">Telecaller Panel</h2>
 
-        <button onClick={() => setView("profile")} className={`sidebar-btn ${view === "profile" ? "active" : ""}`}>
-          <FaUser /> <span>Profile</span>
-        </button>
-
-        <button onClick={() => setView("update")} className={`sidebar-btn ${view === "update" ? "active" : ""}`}>
-          <FaEdit /> <span>Update Profile</span>
-        </button>
+    
 
         <button onClick={() => setView("create-lead")} className={`sidebar-btn ${view === "create-lead" ? "active" : ""}`}>
           <FaPlus /> <span>Create Lead</span>
         </button>
 
+         <button onClick={() => setView("view-leads")} className={`sidebar-btn ${view === "view-leads" ? "active" : ""}`}>
+          <FaList /> <span>All Leads</span>
+        </button>
+
+
         <button onClick={() => setView("assigned-users")} className={`sidebar-btn ${view === "assigned-users" ? "active" : ""}`}>
-  <FaUser /> <span>Assigned Users</span>
+  <FaUser /> <span>Telecallers</span>
 </button>
 
 
 
 
-        <button onClick={() => setView("view-leads")} className={`sidebar-btn ${view === "view-leads" ? "active" : ""}`}>
-          <FaList /> <span>View Leads</span>
-        </button>
-
+       
 
 
         <div className="home-btn-container">
@@ -132,11 +128,13 @@ const TelecallerDashboard = () => {
           </button>
         </div>
       </div>
-
+<div className="admin-dashboard-body">
+  <TTopNav setView={setView} /> 
       <div className="admin-main">
         {renderContent()}
       </div>
     </div>
+  </div>
   );
 };
 

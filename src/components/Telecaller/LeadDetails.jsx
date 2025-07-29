@@ -15,6 +15,8 @@ const LeadDetails = ({ leadData, onBack }) => {
   }
 
   const { lead, telecaller, executive } = leadData;
+  console.log("🧪 Lead Result Data:", lead.result);
+
 
   return (
     <div className="detail-view">
@@ -43,6 +45,27 @@ const LeadDetails = ({ leadData, onBack }) => {
         <p><strong>Email:</strong> {executive.email}</p>
         <p><strong>Role:</strong> {executive.role}</p>
       </section>
+
+      <section className="info-group">
+  <h3>Result Info</h3>
+  {lead.result && Object.values(lead.result).some(val => Object.keys(val).length > 0) ? (
+    Object.entries(lead.result).map(([key, value]) => (
+      <div key={key}>
+        <h4>{key.replace(/_/g, " ")}</h4>
+        {Object.entries(value).map(([k, v]) => (
+          <p key={k}>
+            <strong>{k.replace(/_/g, " ")}:</strong> {String(v)}
+          </p>
+        ))}
+      </div>
+    ))
+  ) : (
+    <p><em>No result added yet.</em></p>
+  )}
+</section>
+
+
+      
 
       <div className="button-group">
         <button className="btn back" onClick={onBack}>← Back</button>

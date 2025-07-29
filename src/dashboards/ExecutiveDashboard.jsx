@@ -9,7 +9,7 @@ import UpdateExecutiveProfile from "../components/ExecutiveControls/UpdateExecut
 import GetSingleLead from "../components/ExecutiveControls/GetSingleLead";
 import GetAllLeads from "../components/ExecutiveControls/GetAllLeads";
 import AssignedUsersExecutive from "../components/ExecutiveControls/AssignedUsersExecutive";
-
+import ETopNav from "../components/ExecutiveControls/ETopNav";
 import CreateLeadResult from "../components/ExecutiveControls/CreateLeadResult";
 
 // Icons
@@ -88,10 +88,12 @@ const [view, setView] = useState("get-all");
           </button>
         </div>
       </div>
-
+<div className="admin-dashboard-body">
+  <ETopNav setView={setView} /> 
       <div className="admin-main">
         {renderContent()}
       </div>
+    </div>
     </div>
   );
 };
