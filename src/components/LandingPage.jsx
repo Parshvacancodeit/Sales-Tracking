@@ -15,7 +15,11 @@ const LandingPage = () => {
       {/* Navbar */}
       <nav className="navbar">
         <div className="logo">
-          <img src="https://res.cloudinary.com/deozs5b2k/image/upload/v1752322519/H2P-t_qkusct.png" alt="H2P Logo" />
+          <img
+            src="https://res.cloudinary.com/deozs5b2k/image/upload/v1752322519/H2P-t_qkusct.png"
+            alt="H2P Logo"
+            style={{ width: "150px", height: "auto" }} // increase width as needed
+          />
         </div>
         <div className="nav-placeholder">{/* Optional right section */}</div>
       </nav>
