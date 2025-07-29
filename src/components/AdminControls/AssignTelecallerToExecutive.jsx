@@ -1,5 +1,7 @@
+// src/components/AdminControls/AssignTelecallerToExecutive.jsx
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../assets/utils/axiosInstance";
+import "../../styles/AdminStyles/AssignTelecaller.css";
 
 const AssignTelecallerToExecutive = () => {
   const [telecallers, setTelecallers] = useState([]);
@@ -9,7 +11,6 @@ const AssignTelecallerToExecutive = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Fetch users based on role
   const fetchUsers = async () => {
     try {
       const teleRes = await axiosInstance.get("/admin/get-user?role=Telecaller");
@@ -17,7 +18,7 @@ const AssignTelecallerToExecutive = () => {
       setTelecallers(teleRes.data || []);
       setExecutives(execRes.data || []);
     } catch (err) {
-      alert("Failed to fetch users. Please check your network or auth.");
+      alert("Failed to fetch users.");
     }
   };
 
@@ -27,17 +28,16 @@ const AssignTelecallerToExecutive = () => {
 
   const handleAssign = async () => {
     if (!selectedTelecaller || !selectedExecutive) {
-      setMessage("Please select both telecaller and executive.");
+      setMessage("❗ Please select both telecaller and executive.");
       return;
     }
 
     setLoading(true);
     try {
-      const res = await axiosInstance.post("/admin/assign", {
+      await axiosInstance.post("/admin/assign", {
         telecaller: selectedTelecaller,
         executive: selectedExecutive,
       });
-
       setMessage("✅ Assignment successful!");
     } catch (err) {
       setMessage("❌ Assignment failed. Please try again.");
@@ -47,10 +47,10 @@ const AssignTelecallerToExecutive = () => {
   };
 
   return (
-    <div className="content-card">
-      <h2>Assign Telecaller to Executive</h2>
+    <div className="assign-container">
+      <h2 className="assign-title">Assign Telecaller to Executive</h2>
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "1rem" }}>
+      <div className="assign-controls">
         <select
           value={selectedTelecaller}
           onChange={(e) => setSelectedTelecaller(e.target.value)}
@@ -80,7 +80,7 @@ const AssignTelecallerToExecutive = () => {
         </button>
       </div>
 
-      {message && <p>{message}</p>}
+      {message && <p className="assign-message">{message}</p>}
     </div>
   );
 };

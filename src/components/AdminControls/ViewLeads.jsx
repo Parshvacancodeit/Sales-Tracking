@@ -8,7 +8,7 @@ const ViewLeads = () => {
 
   useEffect(() => {
     axiosInstance
-      .get("/admin/get-lead")
+      .get("/admin/get-all-leads")
       .then((res) => {
         setLeads(res.data || []);
       })
@@ -27,39 +27,52 @@ const ViewLeads = () => {
       ) : (
         <div className="lead-list">
           {leads.map((item, idx) => {
-            const data = item.lead_data;
-            const { telecaller, executive, lead } = data;
+            const data = item?.lead_data;
+            const telecaller = data?.telecaller || {};
+            const executive = data?.executive || {};
+            const lead = data?.lead || {};
 
             return (
               <div key={idx} className="lead-card">
                 <div className="lead-header">
-                  <div className="lead-number">🧾 Lead #{lead.lead_no}</div>
+                  <div className="lead-number">🧾 Lead #{lead.lead_no || "N/A"}</div>
                   <div className="lead-date">
-                    Created: {new Date(lead.created_at).toLocaleDateString()}
+                    Created:{" "}
+                    {lead.created_at
+                      ? new Date(lead.created_at).toLocaleDateString()
+                      : "N/A"}
                   </div>
                 </div>
 
                 <div className="lead-columns">
                   <div className="lead-column">
                     <h4>📞 Telecaller</h4>
-                    <p className="lead-name">{telecaller.name}</p>
-                    <p className="lead-email">{telecaller.email}</p>
+                    <p className="lead-name">{telecaller.name || "N/A"}</p>
+                    <p className="lead-email">{telecaller.email || "N/A"}</p>
                   </div>
 
                   <div className="lead-column">
                     <h4>👨‍💼 Executive</h4>
-                    <p className="lead-name">{executive.name}</p>
-                    <p className="lead-email">{executive.email}</p>
+                    <p className="lead-name">{executive.name || "N/A"}</p>
+                    <p className="lead-email">{executive.email || "N/A"}</p>
                   </div>
 
                   <div className="lead-column">
                     <h4>🧑 Client Info</h4>
-                    <p className="lead-name">{lead.client_name}</p>
-                    <p>{lead.client_contact}</p>
-                    <p>{lead.client_address}</p>
-                    <p className="lead-desc">{lead.description}</p>
+                    <p className="lead-name">{lead.client_name || "N/A"}</p>
+                    <p>{lead.client_contact || "N/A"}</p>
+                    <p>{lead.client_address || "N/A"}</p>
+                    <p className="lead-desc">{lead.description || "No description"}</p>
                   </div>
                 </div>
+
+                {/* Optional: Show result object if exists */}
+                {lead.result && Object.keys(lead.result).length > 0 && (
+                  <div className="lead-result">
+                    <h4>📊 Result</h4>
+                    <pre>{JSON.stringify(lead.result, null, 2)}</pre>
+                  </div>
+                )}
               </div>
             );
           })}

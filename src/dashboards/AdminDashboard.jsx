@@ -7,25 +7,15 @@ import UserListByRole from "../components/AdminControls/UserListByRole";
 import AssignTelecallerToExecutive from "../components/AdminControls/AssignTelecallerToExecutive";
 import ViewAssignments from "../components/AdminControls/ViewAssignments";
 import ViewLeads from "../components/AdminControls/ViewLeads";
-import GetAssignTc from "../components/AdminControls/GetAssignTc";
+import TopNav from "../components/AdminControls/TopNav";
 
-
-
-
-// React icons
-import { FaUser, FaPlus, FaList, FaLink, FaHome } from "react-icons/fa";
+import { FaUser, FaPlus, FaLink, FaHome } from "react-icons/fa";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [view, setView] = useState("profile");
+  const [view, setView] = useState("list"); // ✅ Default view
   const [profile, setProfile] = useState(null);
   const [email, setEmail] = useState("");
-  const [users, setUsers] = useState([]);
-  const [telecallers, setTelecallers] = useState([]);
-  const [agents, setAgents] = useState([]);
-  const [selectedAssign, setSelectedAssign] = useState({ telecaller: "", agent: "" });
-  const [selectedTcId, setSelectedTcId] = useState(""); // telecaller ID
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -61,55 +51,16 @@ const AdminDashboard = () => {
       alert("Profile updated!");
       setProfile(res.data.user);
     } catch (err) {
-      if (err.response?.status === 422) {
-        alert("Validation error: Enter a valid email.");
-      } else {
-        alert("Failed to update profile.");
-      }
-    }
-  };
-
-  const handleGetUsersByRole = async (role) => {
-    try {
-      const res = await axiosInstance.get(`/admin/get-user?role=${role}`);
-      setUsers(res.data);
-    } catch (err) {
-      alert("Error fetching users.");
+      alert("Failed to update profile.");
     }
   };
 
   const handleCreateUser = async (formData) => {
     try {
-      const res = await axiosInstance.post("/admin/create-user", formData);
+      await axiosInstance.post("/admin/create-user", formData);
       alert("User created successfully");
     } catch (err) {
-      if (err.response?.status === 422) {
-        alert("Validation error: Fill all fields properly.");
-      } else {
-        alert("Failed to create user");
-        console.error(err);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (view === "assign") {
-      axiosInstance.get("/admin/get-user?role=telecaller").then(res => setTelecallers(res.data));
-      axiosInstance.get("/admin/get-user?role=agent").then(res => setAgents(res.data));
-    }
-  }, [view]);
-
-  const handleAssign = async () => {
-    if (!selectedAssign.telecaller || !selectedAssign.agent) {
-      alert("Please select both telecaller and agent.");
-      return;
-    }
-
-    try {
-      await axiosInstance.post("/admin/assign", selectedAssign);
-      alert("Agent assigned successfully.");
-    } catch (err) {
-      alert("Assignment failed.");
+      alert("Failed to create user");
     }
   };
 
@@ -129,89 +80,48 @@ const AdminDashboard = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-input"
               />
-              <button className="form-button" onClick={handleUpdateProfile}>Update Email</button>
+              <button className="form-button" onClick={handleUpdateProfile}>Update</button>
             </div>
           </div>
         );
-
       case "create":
         return (
           <div className="content-card">
             <CreateUser onSubmit={handleCreateUser} />
           </div>
         );
-
       case "list":
         return <UserListByRole />;
-
       case "assign":
-  return <AssignTelecallerToExecutive />;
-
-  case "view-assignments":
-  return <ViewAssignments />;
-
-  case "get-assign-tc":
-  return (
-    <div className="content-card">
-      <h2 className="section-title">View Assignment by Telecaller</h2>
-
-      <div className="form-group">
-        <label>Select Telecaller ID:</label>
-        <input
-          type="text"
-          placeholder="Enter Telecaller ID"
-          value={selectedTcId}
-          onChange={(e) => setSelectedTcId(e.target.value)}
-          className="form-input"
-        />
-      </div>
-
-      {selectedTcId && <GetAssignTc telecallerId={selectedTcId} />}
-    </div>
-  );
-
-
+        return (
+          <div>
+            <AssignTelecallerToExecutive />
+            <ViewAssignments />
+          </div>
+        );
+      case "leads":
+        return <ViewLeads />;
       default:
         return null;
-
-    case "leads":
-      return <ViewLeads />
     }
   };
 
   return (
     <div className="admin-dashboard landing-container">
-      <div className="admin-sidebar">
-        <h2 className="logo">Admin Panel</h2>
 
-        {/* Sidebar buttons with icons */}
-        <button onClick={() => setView("profile")} className={`sidebar-btn ${view === "profile" ? "active" : ""}`}>
-          <FaUser /> <span>Profile</span>
-        </button>
-        <button onClick={() => setView("create")} className={`sidebar-btn ${view === "create" ? "active" : ""}`}>
-          <FaPlus /> <span>Create User</span>
-        </button>
+  
+
+      <div className="admin-sidebar">
         <button onClick={() => setView("list")} className={`sidebar-btn ${view === "list" ? "active" : ""}`}>
-          <FaList /> <span>User List</span>
+          <FaUser /> <span>Users</span>
         </button>
         <button onClick={() => setView("assign")} className={`sidebar-btn ${view === "assign" ? "active" : ""}`}>
-          <FaLink /> <span>Assign Agent</span>
-        </button>
-        <button onClick={() => setView("view-assignments")} className={`sidebar-btn ${view === "view-assignments" ? "active" : ""}`}>
-          <FaLink /> <span>View Assigned</span>
+          <FaLink /> <span>Assign</span>
         </button>
         <button onClick={() => setView("leads")} className={`sidebar-btn ${view === "leads" ? "active" : ""}`}>
-          <FaLink /> <span>View leads</span>
+          <FaLink /> <span>Leads</span>
         </button>
-        <button
-  onClick={() => setView("get-assign-tc")}
-  className={`sidebar-btn ${view === "get-assign-tc" ? "active" : ""}`}
->
-  <FaLink /> <span>Get Assign TC</span>
-</button>
 
-
-        {/* Home button at bottom */}
         <div className="home-btn-container">
           <button onClick={() => navigate("/")} className="sidebar-btn home-btn">
             <FaHome /> <span>Home</span>
@@ -219,10 +129,15 @@ const AdminDashboard = () => {
         </div>
       </div>
 
+<div className="admin-dashboard-body">
+  <TopNav setView={setView} /> 
       <div className="admin-main">
+
+
         {renderContent()}
       </div>
     </div>
+  </div>
   );
 };
 

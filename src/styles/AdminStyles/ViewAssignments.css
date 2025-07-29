@@ -57,3 +57,40 @@
   color: #9ca3af;
   padding-left: 4px;
 }
+
+
+.assignment-viewer {
+  padding: 1rem;
+}
+
+.main-user-card,
+.assigned-user-card {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.assigned-user-card {
+  background: #f1faff;
+}
+
+.leads-list {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}
+
+.lead-card {
+  background: #fff;
+  border: 1px solid #aaa;
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-top: 0.6rem;
+}
+
+.no-leads {
+  font-style: italic;
+  color: #888;
+  margin-top: 0.5rem;
+}

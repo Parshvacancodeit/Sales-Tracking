@@ -1,0 +1,30 @@
+.table-style {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.table-style th, .table-style td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 15px;
+}
+
+.table-style th {
+  background-color: #f0ecfc;
+  color: #561cc7;
+  font-weight: 600;
+}
+
+.table-style tr:hover {
+  background-color: #faf8ff;
+}
+
+.table-style tr:hover {
+  background-color: #f4f0ff;
+  cursor: pointer;
+}
+
