@@ -9,7 +9,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // 👈 new state
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,21 +62,21 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <input
-          type={showPassword ? "text" : "password"} // 👈 toggle type
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <label className="show-password-toggle">
+        <div className="password-container">
           <input
-            type="checkbox"
-            checked={showPassword}
-            onChange={() => setShowPassword(!showPassword)}
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          Show Password
-        </label>
+          <label className="show-password-label">
+            <input
+              type="checkbox"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+          </label>
+        </div>
 
         <button onClick={handleLogin}>Login</button>
 
