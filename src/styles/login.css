@@ -70,3 +70,50 @@
   color: #561cc7;
   text-decoration: underline;
 }
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  user-select: none;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"] {
+  flex: 1;
+  padding-right: 60px;
+}
+
+.show-password-label {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  gap: 4px;
+  cursor: pointer;
+  background: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
