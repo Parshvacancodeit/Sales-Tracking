@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosInstance from "../../assets/utils/axiosInstance";
 import "../../styles/ExecutiveStyles/getAllLeads.css";
+import LeadResultModal from "./LeadResultModal";
 
 import {
   FaUser,
@@ -14,57 +15,54 @@ import {
 } from "react-icons/fa";
 
 const GetAllLeads = () => {
-  const [telecallerId, setTelecallerId] = useState("");
   const [leads, setLeads] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [activeLeadId, setActiveLeadId] = useState(null);
 
-  const fetchLeads = async () => {
-    setLoading(true);
-    try {
-      const params = {};
-      if (telecallerId.trim()) {
-        params.telecaller_id = telecallerId.trim();
+  useEffect(() => {
+    const fetchLeads = async () => {
+      setLoading(true);
+      try {
+        const response = await axiosInstance.get("/executive/get-all-lead");
+        setLeads(response.data);
+        setError(null);
+      } catch (err) {
+        setError(err.response?.data || "Error fetching leads");
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const response = await axiosInstance.get("/executive/get-all-lead", {
-        params,
-      });
+    fetchLeads();
+  }, []);
 
-      setLeads(response.data);
-      setError(null);
-    } catch (err) {
-      setLeads([]);
-      setError(err.response?.data || "Error fetching leads");
-    } finally {
-      setLoading(false);
-    }
+  const handleCardClick = (leadId) => {
+    console.log("Clicked lead ID:", leadId);
+    setActiveLeadId(leadId);
+    setShowModal(true);
   };
 
   return (
     <div className="executive-section">
       <h2>All Leads</h2>
-      <div className="lead-filter-bar">
-        <input
-          type="text"
-          placeholder="(Optional) Telecaller ID"
-          value={telecallerId}
-          onChange={(e) => setTelecallerId(e.target.value)}
-        />
-        <button onClick={fetchLeads} disabled={loading}>
-          {loading ? "Loading..." : "Fetch Leads"}
-        </button>
-      </div>
 
+      {loading && <p>Loading leads...</p>}
       {error && <p className="error-text">{JSON.stringify(error)}</p>}
 
       <div className="leads-container">
         {leads.map((item, index) => {
-          const { lead_data } = item;
+          const { id, lead_data } = item;
           const { telecaller, executive, lead } = lead_data;
 
           return (
-            <div className="lead-card" key={index}>
+            <div
+              className="lead-card clickable"
+              key={index}
+              onClick={() => handleCardClick(lead_data.id)}
+
+            >
               <h3><FaFileAlt /> Lead No: {lead.lead_no}</h3>
               <p><FaUser /> Client: {lead.client_name}</p>
               <p><FaPhone /> Contact: {lead.client_contact}</p>
@@ -88,6 +86,16 @@ const GetAllLeads = () => {
           );
         })}
       </div>
+
+      {showModal && activeLeadId && (
+        <LeadResultModal
+          leadId={activeLeadId}
+          onClose={() => {
+            setShowModal(false);
+            setActiveLeadId(null);
+          }}
+        />
+      )}
     </div>
   );
 };

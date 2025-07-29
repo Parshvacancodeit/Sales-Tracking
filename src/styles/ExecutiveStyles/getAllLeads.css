@@ -60,3 +60,13 @@
   font-size: 14px;
   color: #555;
 }
+
+
+.lead-card.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.lead-card.clickable:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}

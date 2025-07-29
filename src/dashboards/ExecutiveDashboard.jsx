@@ -17,7 +17,7 @@ import { FaUser, FaEdit, FaEye, FaClipboardList, FaPlus, FaHome } from "react-ic
 
 const ExecutiveDashboard = () => {
   const navigate = useNavigate();
-  const [view, setView] = useState("profile");
+const [view, setView] = useState("get-all");
   const [profile, setProfile] = useState(null);
   const [email, setEmail] = useState("");
 
@@ -26,28 +26,7 @@ const ExecutiveDashboard = () => {
     if (!token) navigate("/login");
   }, []);
 
-  // const fetchProfile = () => {
-  //   axiosInstance
-  //     .get("/executive/profile")
-  //     .then((res) => {
-  //       setProfile(res.data.user);
-  //       setEmail(res.data.user.email);
-  //     })
-  //     .catch((err) => {
-  //       if (err.response?.status === 401) {
-  //         localStorage.removeItem("token");
-  //         navigate("/login");
-  //       } else {
-  //         alert("Failed to fetch profile.");
-  //       }
-  //     });
-  // };
 
-  // useEffect(() => {
-  //   if (view === "profile") {
-  //     fetchProfile();
-  //   }
-  // }, [view]);
 
 
 
@@ -89,26 +68,19 @@ const ExecutiveDashboard = () => {
       <div className="admin-sidebar">
         <h2 className="logo">Executive Panel</h2>
 
-        <button onClick={() => setView("profile")} className={`sidebar-btn ${view === "profile" ? "active" : ""}`}>
-          <FaUser /> <span>Profile</span>
-        </button>
-        <button onClick={() => setView("update")} className={`sidebar-btn ${view === "update" ? "active" : ""}`}>
-          <FaEdit /> <span>Update Profile</span>
-        </button>
-        <button onClick={() => setView("get-single")} className={`sidebar-btn ${view === "get-single" ? "active" : ""}`}>
-          <FaEye /> <span>Get Lead</span>
-        </button>
-        <button onClick={() => setView("view-assign")} className={`sidebar-btn ${view === "view-assign" ? "active" : ""}`}>
-  <FaUser /> <span>Assigned Users</span>
+        <button
+  onClick={() => setView("get-all")}
+  className={`sidebar-btn ${view === "get-all" ? "active" : ""}`}
+>
+  <FaClipboardList /> <span>Leads</span>
 </button>
 
-        <button onClick={() => setView("get-all")} className={`sidebar-btn ${view === "get-all" ? "active" : ""}`}>
-          <FaClipboardList /> <span>All Leads</span>
-        </button>
-
-        <button onClick={() => setView("create-result")} className={`sidebar-btn ${view === "create-result" ? "active" : ""}`}>
-          <FaPlus /> <span>Create Result</span>
-        </button>
+<button
+  onClick={() => setView("view-assign")}
+  className={`sidebar-btn ${view === "view-assign" ? "active" : ""}`}
+>
+  <FaUser /> <span>Telecallers</span>
+</button>
 
         <div className="home-btn-container">
           <button onClick={() => navigate("/")} className="sidebar-btn home-btn">
