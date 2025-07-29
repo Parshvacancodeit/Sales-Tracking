@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/login.css";
@@ -6,9 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { state } = useLocation();
-  const role = state?.role || "Admin"; // fallback if not passed
+  const role = state?.role || "Admin";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 new state
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -52,6 +54,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-box">
         <h2>{role} Login</h2>
+
         <input
           type="email"
           placeholder="Enter email"
@@ -60,11 +63,20 @@ const Login = () => {
         />
 
         <input
-          type="password"
+          type={showPassword ? "text" : "password"} // 👈 toggle type
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
+        <label className="show-password-toggle">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
+          />
+          Show Password
+        </label>
 
         <button onClick={handleLogin}>Login</button>
 
