@@ -12,6 +12,7 @@ import {
   FaClock,
   FaUserTie,
   FaUsers,
+  FaInfoCircle
 } from "react-icons/fa";
 
 const GetAllLeads = () => {
@@ -69,6 +70,7 @@ const GetAllLeads = () => {
               <p><FaMapMarkerAlt /> Address: {lead.client_address}</p>
               <p><FaFileAlt /> Description: {lead.description}</p>
               <p><FaClock /> Created At: {lead.created_at}</p>
+              <p><FaInfoCircle /> Status: {lead.status}</p>
 
               <div className="lead-sub-info">
                 <div>
